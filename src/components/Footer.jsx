@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { Facebook, MessageCircle, Phone } from 'lucide-react';
 
 const Footer = () => {
   return (
@@ -12,35 +13,35 @@ const Footer = () => {
             <p className="mt-2">ул. Ленина, д.3, Батайск</p>
           </div>
           
-          <div className="flex gap-4">
+          <div className="flex gap-6">
             <motion.a
               href="https://vk.com/"
               target="_blank"
               rel="noopener noreferrer"
-              whileHover={{ scale: 1.1 }}
-              className="btn bg-white text-primary"
+              whileHover={{ scale: 1.2, rotate: 5 }}
+              className="bg-white p-3 rounded-full text-primary hover:bg-secondary transition-colors duration-300"
             >
-              VK
+              <Facebook className="w-6 h-6" />
             </motion.a>
             
             <motion.a
               href="https://t.me/"
               target="_blank"
               rel="noopener noreferrer"
-              whileHover={{ scale: 1.1 }}
-              className="btn bg-white text-primary"
+              whileHover={{ scale: 1.2, rotate: 5 }}
+              className="bg-white p-3 rounded-full text-primary hover:bg-secondary transition-colors duration-300"
             >
-              Telegram
+              <MessageCircle className="w-6 h-6" />
             </motion.a>
             
             <motion.a
               href="https://wa.me/79614160767"
               target="_blank"
               rel="noopener noreferrer"
-              whileHover={{ scale: 1.1 }}
-              className="btn bg-white text-primary"
+              whileHover={{ scale: 1.2, rotate: 5 }}
+              className="bg-white p-3 rounded-full text-primary hover:bg-secondary transition-colors duration-300"
             >
-              WhatsApp
+              <Phone className="w-6 h-6" />
             </motion.a>
           </div>
         </div>

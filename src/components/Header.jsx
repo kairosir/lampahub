@@ -16,16 +16,26 @@ const Header = () => {
           <span className="text-2xl font-bold text-primary">ЛАМПА</span>
         </div>
         
-        <nav className="hidden md:flex gap-6">
-          <a href="#services" className="hover:text-primary transition-colors">Услуги</a>
-          <a href="#gallery" className="hover:text-primary transition-colors">Галерея</a>
-          <a href="#booking" className="hover:text-primary transition-colors">Запись</a>
-          <a href="#contacts" className="hover:text-primary transition-colors">Контакты</a>
+        <nav className="hidden md:flex gap-4">
+          {['Услуги', 'Галерея', 'Запись', 'Контакты'].map((item) => (
+            <motion.a
+              key={item}
+              href={`#${item.toLowerCase()}`}
+              className="px-4 py-2 rounded-full border-2 border-primary text-primary hover:bg-primary hover:text-white transition-all duration-300"
+              whileHover={{ scale: 1.05 }}
+            >
+              {item}
+            </motion.a>
+          ))}
         </nav>
 
-        <a href="tel:+79614160767" className="btn btn-primary">
+        <motion.a 
+          href="tel:+79614160767" 
+          className="btn bg-tertiary text-white hover:bg-primary transition-colors duration-300"
+          whileHover={{ scale: 1.05 }}
+        >
           +7 (961) 416-07-67
-        </a>
+        </motion.a>
       </div>
     </motion.header>
   );
