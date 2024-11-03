@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Palette, Users, Briefcase, Lightbulb, Heart, Family, Brain, Sparkles } from 'lucide-react';
+import { Palette, Users, Briefcase, Lightbulb, Heart, Users2, Brain, Sparkles } from 'lucide-react';
 
 const services = [
   { icon: <Palette />, title: "Арт-события, выставки, творческие вечера" },
@@ -9,7 +9,7 @@ const services = [
   { icon: <Briefcase />, title: "Мастер классы и лекции" },
   { icon: <Brain />, title: "Центр профориентации" },
   { icon: <Heart />, title: "Центр психологической помощи" },
-  { icon: <Family />, title: "Семейные проекты" },
+  { icon: <Users2 />, title: "Семейные проекты" },
   { icon: <Sparkles />, title: "Творческое развитие" },
 ];
 
