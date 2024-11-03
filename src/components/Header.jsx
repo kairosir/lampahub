@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { Lightbulb } from 'lucide-react';
 
 const Header = () => {
   return (
@@ -11,7 +12,7 @@ const Header = () => {
     >
       <div className="container mx-auto flex justify-between items-center">
         <div className="flex items-center gap-2">
-          <img src="/logo.svg" alt="Лампа" className="h-10 animate-float" />
+          <Lightbulb className="h-10 w-10 text-primary animate-float" />
           <span className="text-2xl font-bold text-primary">ЛАМПА</span>
         </div>
         
