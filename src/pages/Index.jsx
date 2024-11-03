@@ -8,11 +8,11 @@ import Footer from '../components/Footer';
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-white to-lightblue">
+    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-lightblue">
       <Header />
       
-      <main>
-        <section className="section container mx-auto text-center">
+      <main className="container mx-auto px-4">
+        <section className="section text-center mt-8">
           <h1 className="text-4xl md:text-6xl font-bold mb-6 animate-float">
             ЛАМПА
           </h1>
