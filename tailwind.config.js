@@ -20,10 +20,9 @@ export default {
     },
     extend: {
       colors: {
-        primary: "#4A90E2",    // Fresh blue
-        secondary: "#98D8D8",  // Soft turquoise
-        accent: "#F7E8D0",     // Warm beige
-        tertiary: "#7FC8A9",   // Mint green
+        primary: "#FF6B35",    // Яркий оранжевый
+        secondary: "#FFB563",  // Светлый оранжевый
+        accent: "#FFC4BC",     // Нежно-розовый
         lightblue: "#E7F2F8",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
