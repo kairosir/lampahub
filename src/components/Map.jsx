@@ -18,6 +18,9 @@ const Map = () => {
             loading="lazy"
           ></iframe>
         </div>
+        <div className="text-center mt-6 text-gray-600">
+          г. Батайск, ул. Ленина 3, здание ДДТ
+        </div>
       </div>
     </section>
   );

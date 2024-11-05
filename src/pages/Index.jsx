@@ -4,6 +4,7 @@ import Description from '../components/Description';
 import Services from '../components/Services';
 import Gallery from '../components/Gallery';
 import BookingForm from '../components/BookingForm';
+import News from '../components/News';
 import Map from '../components/Map';
 import Footer from '../components/Footer';
 
@@ -32,8 +33,9 @@ const Index = () => {
 
         <Description />
         <Services />
-        <Gallery />
         <BookingForm />
+        <News />
+        <Gallery />
         <Map />
       </main>
 

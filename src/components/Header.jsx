@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Lightbulb } from 'lucide-react';
+import { Lightbulb, Home, Phone } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
   return (
@@ -17,6 +18,15 @@ const Header = () => {
         </div>
         
         <nav className="hidden md:flex gap-4">
+          <Link to="/">
+            <motion.button
+              className="flex items-center gap-2 px-4 py-2 rounded-full border-2 border-primary text-primary hover:bg-primary hover:text-white transition-all duration-300"
+              whileHover={{ scale: 1.05 }}
+            >
+              <Home className="h-4 w-4" />
+              Главная
+            </motion.button>
+          </Link>
           {['Услуги', 'Галерея', 'Запись', 'Контакты'].map((item) => (
             <motion.a
               key={item}
@@ -31,9 +41,10 @@ const Header = () => {
 
         <motion.a 
           href="tel:+79614160767" 
-          className="btn bg-tertiary text-white hover:bg-primary transition-colors duration-300"
+          className="flex items-center gap-2 px-4 py-2 rounded-full border-2 border-primary text-primary hover:bg-primary hover:text-white transition-all duration-300"
           whileHover={{ scale: 1.05 }}
         >
+          <Phone className="h-4 w-4" />
           +7 (961) 416-07-67
         </motion.a>
       </div>
