@@ -1,5 +1,6 @@
 import React from 'react';
 import Header from '../components/Header';
+import Description from '../components/Description';
 import Services from '../components/Services';
 import Gallery from '../components/Gallery';
 import BookingForm from '../components/BookingForm';
@@ -29,6 +30,7 @@ const Index = () => {
           </div>
         </section>
 
+        <Description />
         <Services />
         <Gallery />
         <BookingForm />
