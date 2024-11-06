@@ -4,7 +4,7 @@ import path from 'path';
 
 export default defineConfig({
   plugins: [react()],
-  base: '/lampy-creative-space/',
+  base: '/lampy-creative-space-32/',
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
