@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/carousel";
 
 const images = [
-  "/lampahub/src/components/images/photo_2024-11-07 11.33.33 PM.jpeg",
+  "/lampahub/src/components/images/photo1.jpeg",
 ];
 
 const Gallery = () => {
