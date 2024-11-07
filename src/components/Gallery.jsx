@@ -51,22 +51,11 @@ const Gallery = () => {
     carousel.addEventListener('mouseup', mouseUp);
     carousel.addEventListener('mousemove', mouseMove);
 
-    // Auto scroll
-    const autoScroll = setInterval(() => {
-      if (!isDown) {
-        carousel.scrollLeft += 1;
-        if (carousel.scrollLeft >= carousel.scrollWidth - carousel.clientWidth) {
-          carousel.scrollLeft = 0;
-        }
-      }
-    }, 30);
-
     return () => {
       carousel.removeEventListener('mousedown', mouseDown);
       carousel.removeEventListener('mouseleave', mouseLeave);
       carousel.removeEventListener('mouseup', mouseUp);
       carousel.removeEventListener('mousemove', mouseMove);
-      clearInterval(autoScroll);
     };
   }, []);
 
@@ -79,7 +68,7 @@ const Gallery = () => {
         
         <div 
           ref={carouselRef}
-          className="gallery-carousel flex gap-4 overflow-x-auto pb-8 select-none"
+          className="gallery-carousel flex gap-4 overflow-x-auto pb-8 select-none cursor-grab active:cursor-grabbing"
         >
           {images.map((src, index) => (
             <motion.div

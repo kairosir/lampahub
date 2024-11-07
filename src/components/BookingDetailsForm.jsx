@@ -4,12 +4,11 @@ import InputMask from 'react-input-mask';
 import { toast } from 'sonner';
 import { sendTelegramNotification } from '../utils/telegram';
 
-const BookingDetailsForm = ({ activity }) => {
+const BookingDetailsForm = ({ activity, isEvent = false }) => {
   const [formData, setFormData] = useState({
-    parentName: '',
+    name: '',
     phone: '',
-    childName: '',
-    childAge: '',
+    selectedActivity: activity || '',
     comment: ''
   });
 
@@ -25,10 +24,9 @@ const BookingDetailsForm = ({ activity }) => {
     e.preventDefault();
     
     const message = `
-Новая заявка на занятие: ${activity}
-ФИО родителя: ${formData.parentName}
+Новая заявка${isEvent ? ' на мероприятие' : ' на занятие'}: ${formData.selectedActivity}
+ФИО: ${formData.name}
 Телефон: ${formData.phone}
-ФИО и возраст ребенка: ${formData.childName}, ${formData.childAge} лет
 Комментарий: ${formData.comment}
     `;
 
@@ -36,10 +34,9 @@ const BookingDetailsForm = ({ activity }) => {
       await sendTelegramNotification(message);
       toast.success('Заявка успешно отправлена!');
       setFormData({
-        parentName: '',
+        name: '',
         phone: '',
-        childName: '',
-        childAge: '',
+        selectedActivity: activity || '',
         comment: ''
       });
     } catch (error) {
@@ -53,22 +50,24 @@ const BookingDetailsForm = ({ activity }) => {
       animate={{ opacity: 1, y: 0 }}
       className="max-w-2xl mx-auto p-6 bg-white rounded-xl shadow-lg"
     >
-      <h2 className="text-3xl font-bold text-center mb-8">Запись на занятие: {activity}</h2>
+      <h2 className="text-3xl font-bold text-center mb-8">
+        {isEvent ? 'Запись на мероприятие' : `Запись на занятие: ${activity}`}
+      </h2>
       
       <form onSubmit={handleSubmit} className="space-y-6">
         <div className="space-y-2">
-          <label className="block text-sm font-medium">ФИО Родителя</label>
+          <label className="block text-sm font-medium">ФИО</label>
           <motion.input
             whileFocus={{ scale: 1.01 }}
             type="text"
-            name="parentName"
-            value={formData.parentName}
+            name="name"
+            value={formData.name}
             onChange={handleInputChange}
             pattern="[А-Яа-яЁё\s]{1,40}"
             maxLength={40}
             className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
             required
-            placeholder="Введите ФИО родителя"
+            placeholder="Введите ФИО"
           />
         </div>
 
@@ -87,39 +86,30 @@ const BookingDetailsForm = ({ activity }) => {
           </InputMask>
         </div>
 
-        <div className="grid grid-cols-3 gap-4">
-          <div className="col-span-2 space-y-2">
-            <label className="block text-sm font-medium">ФИО ребенка</label>
-            <motion.input
-              whileFocus={{ scale: 1.01 }}
-              type="text"
-              name="childName"
-              value={formData.childName}
-              onChange={handleInputChange}
-              pattern="[А-Яа-яЁё\s]{1,40}"
-              maxLength={40}
-              className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
-              required
-              placeholder="Введите ФИО ребенка"
-            />
-          </div>
-          
+        {isEvent && (
           <div className="space-y-2">
-            <label className="block text-sm font-medium">Возраст</label>
-            <motion.input
-              whileFocus={{ scale: 1.01 }}
-              type="number"
-              name="childAge"
-              value={formData.childAge}
+            <label className="block text-sm font-medium">Выберите мероприятие</label>
+            <select
+              name="selectedActivity"
+              value={formData.selectedActivity}
               onChange={handleInputChange}
-              min="1"
-              max="99"
               className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
               required
-              placeholder="Лет"
-            />
+            >
+              <option value="">Выберите мероприятие</option>
+              {[
+                "Арт-вечера",
+                "Дни рождения",
+                "Тематические вечера/квартирники",
+                "Тренинги",
+                "Литературный клуб (детский\\взрослый)",
+                "Корпоративные встречи"
+              ].map((item) => (
+                <option key={item} value={item}>{item}</option>
+              ))}
+            </select>
           </div>
-        </div>
+        )}
 
         <div className="space-y-2">
           <label className="block text-sm font-medium">Комментарий</label>

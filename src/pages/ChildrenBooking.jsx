@@ -34,7 +34,7 @@ const ChildrenBooking = () => {
           <>
             <h1 className="text-4xl font-bold text-center mb-12">Занятия для детей</h1>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-              {activities.map((activity, index) => (
+              {activities.slice(0, -1).map((activity, index) => (
                 <motion.button
                   key={activity}
                   className="card p-6 text-center hover:shadow-xl bg-white"
@@ -47,6 +47,17 @@ const ChildrenBooking = () => {
                   <h3 className="text-xl font-semibold text-secondary">{activity}</h3>
                 </motion.button>
               ))}
+              <motion.button
+                key={activities[activities.length - 1]}
+                className="card p-6 text-center hover:shadow-xl bg-white col-span-3 md:col-span-2 lg:col-span-1 lg:col-start-2"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: (activities.length - 1) * 0.1 }}
+                whileHover={{ scale: 1.03, y: -5 }}
+                onClick={() => handleActivitySelect(activities[activities.length - 1])}
+              >
+                <h3 className="text-xl font-semibold text-secondary">{activities[activities.length - 1]}</h3>
+              </motion.button>
             </div>
           </>
         ) : (

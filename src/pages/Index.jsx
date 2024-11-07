@@ -9,6 +9,13 @@ import Map from '../components/Map';
 import Footer from '../components/Footer';
 
 const Index = () => {
+  const scrollToBooking = () => {
+    const element = document.getElementById('booking');
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-lightblue">
       <Header />
@@ -21,13 +28,13 @@ const Index = () => {
           <p className="text-xl md:text-2xl mb-8">
             Творческое пространство и центр коммуникаций! Для всех возрастов
           </p>
-          <div className="flex flex-wrap gap-4 justify-center">
-            <a href="#booking" className="btn btn-primary">
+          <div className="flex justify-center">
+            <button 
+              onClick={scrollToBooking}
+              className="btn btn-primary"
+            >
               Записаться на занятие
-            </a>
-            <a href="#services" className="btn bg-secondary text-white hover:bg-opacity-90 hover:scale-105">
-              Узнать больше
-            </a>
+            </button>
           </div>
         </section>
 

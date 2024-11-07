@@ -3,6 +3,7 @@ import Index from "./pages/Index.jsx";
 import AdultsBooking from "./pages/AdultsBooking.jsx";
 import ChildrenBooking from "./pages/ChildrenBooking.jsx";
 import EventsBooking from "./pages/EventsBooking.jsx";
+import AdminNews from "./pages/AdminNews.jsx";
 
 export const navItems = [
   {
@@ -25,5 +26,10 @@ export const navItems = [
     title: "Events Booking",
     to: "/events-booking",
     page: <EventsBooking />,
+  },
+  {
+    title: "Admin News",
+    to: "/admin-news",
+    page: <AdminNews />,
   },
 ];

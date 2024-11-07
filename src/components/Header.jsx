@@ -1,9 +1,19 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Lightbulb, Home, Phone } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Lightbulb, Home } from 'lucide-react';
+import { Link, useLocation } from 'react-router-dom';
 
 const Header = () => {
+  const location = useLocation();
+  const isHomePage = location.pathname === '/';
+
+  const scrollToSection = (sectionId) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <motion.header 
       className="bg-white shadow-md py-4 px-6 sticky top-0 z-50"
@@ -27,15 +37,28 @@ const Header = () => {
               Главная
             </motion.button>
           </Link>
-          {['Услуги', 'Галерея', 'Запись', 'Контакты'].map((item) => (
-            <motion.a
-              key={item}
-              href={`#${item.toLowerCase()}`}
+          {isHomePage && [
+            {
+              title: 'Направления',
+              id: 'services'
+            },
+            {
+              title: 'Галерея',
+              id: 'gallery'
+            },
+            {
+              title: 'Контакты',
+              id: 'map'
+            }
+          ].map((item) => (
+            <motion.button
+              key={item.id}
+              onClick={() => scrollToSection(item.id)}
               className="px-4 py-2 rounded-full border-2 border-primary text-primary hover:bg-primary hover:text-white transition-all duration-300"
               whileHover={{ scale: 1.05 }}
             >
-              {item}
-            </motion.a>
+              {item.title}
+            </motion.button>
           ))}
         </nav>
 
@@ -44,7 +67,6 @@ const Header = () => {
           className="flex items-center gap-2 px-4 py-2 rounded-full border-2 border-primary text-primary hover:bg-primary hover:text-white transition-all duration-300"
           whileHover={{ scale: 1.05 }}
         >
-          <Phone className="h-4 w-4" />
           +7 (961) 416-07-67
         </motion.a>
       </div>
