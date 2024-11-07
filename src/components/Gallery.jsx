@@ -10,14 +10,7 @@ import {
 } from "@/components/ui/carousel";
 
 const images = [
-  "https://images.unsplash.com/photo-1649972904349-6e44c42644a7",
-  "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b",
-  "https://images.unsplash.com/photo-1518770660439-4636190af475",
-  "https://images.unsplash.com/photo-1461749280684-dccba630e2f6",
-  "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d",
-  "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158",
-  "https://images.unsplash.com/photo-1485827404703-89b55fcc595e",
-  "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5",
+  "/lampahub/src/components/images/photo_2024-11-07 11.33.33 PM.jpeg",
 ];
 
 const Gallery = () => {
