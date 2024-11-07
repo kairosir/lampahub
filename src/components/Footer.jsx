@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { MessageCircle, Phone, MessageSquare } from 'lucide-react';
+import { MessageCircle, Phone, VK } from 'lucide-react';
 
 const Footer = () => {
   return (
@@ -41,7 +41,7 @@ const Footer = () => {
               whileHover={{ scale: 1.2, rotate: 5 }}
               className="bg-white p-3 rounded-full text-primary hover:bg-secondary transition-colors duration-300"
             >
-              <MessageSquare className="w-6 h-6" />
+              <VK className="w-6 h-6" />
             </motion.a>
           </div>
         </div>

@@ -76,6 +76,7 @@ const BookingForm = () => {
               <h3 className="text-2xl font-semibold mb-4">Мероприятия</h3>
               <motion.button
                 className="btn bg-accent text-white w-full hover:bg-opacity-90"
+                style={{ backgroundColor: '#FF69B4' }}
                 whileHover={{ scale: 1.02 }}
                 onClick={() => handleBooking('events')}
               >

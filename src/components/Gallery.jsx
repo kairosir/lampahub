@@ -1,5 +1,13 @@
-import React, { useRef, useEffect } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
 
 const images = [
   "https://images.unsplash.com/photo-1649972904349-6e44c42644a7",
@@ -13,52 +21,6 @@ const images = [
 ];
 
 const Gallery = () => {
-  const carouselRef = useRef(null);
-  let isDown = false;
-  let startX;
-  let scrollLeft;
-
-  useEffect(() => {
-    const carousel = carouselRef.current;
-    
-    const mouseDown = (e) => {
-      isDown = true;
-      carousel.classList.add('active');
-      startX = e.pageX - carousel.offsetLeft;
-      scrollLeft = carousel.scrollLeft;
-    };
-
-    const mouseLeave = () => {
-      isDown = false;
-      carousel.classList.remove('active');
-    };
-
-    const mouseUp = () => {
-      isDown = false;
-      carousel.classList.remove('active');
-    };
-
-    const mouseMove = (e) => {
-      if (!isDown) return;
-      e.preventDefault();
-      const x = e.pageX - carousel.offsetLeft;
-      const walk = (x - startX) * 2;
-      carousel.scrollLeft = scrollLeft - walk;
-    };
-
-    carousel.addEventListener('mousedown', mouseDown);
-    carousel.addEventListener('mouseleave', mouseLeave);
-    carousel.addEventListener('mouseup', mouseUp);
-    carousel.addEventListener('mousemove', mouseMove);
-
-    return () => {
-      carousel.removeEventListener('mousedown', mouseDown);
-      carousel.removeEventListener('mouseleave', mouseLeave);
-      carousel.removeEventListener('mouseup', mouseUp);
-      carousel.removeEventListener('mousemove', mouseMove);
-    };
-  }, []);
-
   return (
     <section id="gallery" className="section">
       <div className="container mx-auto">
@@ -66,24 +28,32 @@ const Gallery = () => {
           Наша галерея
         </h2>
         
-        <div 
-          ref={carouselRef}
-          className="gallery-carousel flex gap-4 overflow-x-auto pb-8 select-none cursor-grab active:cursor-grabbing"
+        <Carousel
+          opts={{
+            align: "start",
+            loop: true,
+          }}
+          className="w-full"
         >
-          {images.map((src, index) => (
-            <motion.div
-              key={index}
-              className="gallery-item flex-none w-72 h-48 rounded-lg overflow-hidden"
-              whileHover={{ scale: 1.05 }}
-            >
-              <img
-                src={src}
-                alt={`Gallery ${index + 1}`}
-                className="w-full h-full object-cover"
-              />
-            </motion.div>
-          ))}
-        </div>
+          <CarouselContent className="-ml-2 md:-ml-4">
+            {images.map((src, index) => (
+              <CarouselItem key={index} className="pl-2 md:pl-4 md:basis-1/2 lg:basis-1/3">
+                <motion.div
+                  className="aspect-square overflow-hidden rounded-xl border-2 border-gray-200 shadow-lg"
+                  whileHover={{ scale: 1.02 }}
+                >
+                  <img
+                    src={src}
+                    alt={`Gallery ${index + 1}`}
+                    className="w-full h-full object-cover"
+                  />
+                </motion.div>
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+          <CarouselPrevious className="hidden md:flex -left-4 bg-white border-primary text-primary hover:bg-primary hover:text-white" />
+          <CarouselNext className="hidden md:flex -right-4 bg-white border-primary text-primary hover:bg-primary hover:text-white" />
+        </Carousel>
       </div>
     </section>
   );
