@@ -36,7 +36,7 @@ const Header = () => {
       animate={{ y: 0 }}
       transition={{ duration: 0.5 }}
     >
-      <div className="container mx-auto flex justify-between items-center">
+      <div className="container mx-auto flex justify-between items-center gap-x-4">
         <div className="flex items-center gap-2">
           <Lightbulb className="h-10 w-10 text-primary animate-float" />
           <span className="text-2xl font-bold text-primary">ЛАМПА</span>
