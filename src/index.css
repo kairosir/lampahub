@@ -37,6 +37,24 @@
   .section {
     @apply py-16 px-8 md:px-12 bg-white rounded-3xl shadow-lg my-8 mx-4 md:mx-8;
   }
+
+  .phone-number {
+    @apply flex items-center gap-2 px-4 py-2 rounded-full border-2 border-primary text-primary transition-all duration-300 whitespace-nowrap;
+    min-width: 160px;
+  }
+
+  .phone-number:hover {
+    @apply bg-primary text-white;
+    transform: scale(1.05);
+  }
+}
+
+@media (max-width: 480px) {
+  .phone-number {
+    font-size: 14px;
+    padding: 6px 10px;
+    min-width: 140px;
+  }
 }
 
 .gallery-carousel {
