@@ -8,9 +8,17 @@ const Header = () => {
   const isHomePage = location.pathname === '/';
 
   const scrollToSection = (sectionId) => {
+    if (sectionId === 'contacts') {
+      window.scrollTo({
+        top: document.documentElement.scrollHeight,
+        behavior: 'smooth'
+      });
+      return;
+    }
+
     const element = document.getElementById(sectionId);
     if (element) {
-      const headerOffset = 80; // Height of the header
+      const headerOffset = 80;
       const elementPosition = element.getBoundingClientRect().top;
       const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
 
@@ -55,7 +63,7 @@ const Header = () => {
             },
             {
               title: 'Контакты',
-              id: 'map'
+              id: 'contacts'
             }
           ].map((item) => (
             <motion.button
