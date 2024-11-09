@@ -39,7 +39,7 @@
   }
 
   .phone-number {
-    @apply flex items-center gap-2 px-4 py-2 rounded-full border-2 border-primary text-primary transition-all duration-300 whitespace-nowrap;
+    @apply flex items-center gap-4 px-4 py-2 rounded-full border-2 border-primary text-primary transition-all duration-300 whitespace-nowrap;
     min-width: 160px;
   }
 
