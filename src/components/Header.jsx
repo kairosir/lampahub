@@ -79,7 +79,7 @@ const Header = () => {
 
         <motion.a 
           href="tel:+79614160767" 
-          className="flex items-center gap-2 px-4 py-2 rounded-full border-2 border-primary text-primary hover:bg-primary hover:text-white transition-all duration-300"
+          className="text-sm md:text-base flex items-center gap-1 px-3 md:px-4 py-2 rounded-full border-2 border-primary text-primary hover:bg-primary hover:text-white transition-all duration-300 whitespace-nowrap"
           whileHover={{ scale: 1.05 }}
         >
           +7 (961) 416-07-67
