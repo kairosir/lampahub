@@ -2,20 +2,16 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { MessageCircle, Phone } from 'lucide-react';
 
+// SVG иконка ВКонтакте
 const VKIcon = () => (
-  <svg 
-    viewBox="0 0 24 24" 
-    width="24" 
-    height="24" 
-    stroke="currentColor" 
-    strokeWidth="2" 
-    fill="none" 
-    strokeLinecap="round" 
-    strokeLinejoin="round"
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="currentColor"
   >
-    <path d="M3 3h18v18H3z" fill="none"/>
-    <path d="M13 16.5h-2c-4.5 0-7-2.5-7-7v-2c0-4.5 2.5-7 7-7h2c4.5 0 7 2.5 7 7v2c0 4.5-2.5 7-7 7zm-2-14c-3.3 0-5 1.7-5 5v2c0 3.3 1.7 5 5 5h2c3.3 0 5-1.7 5-5v-2c0-3.3-1.7-5-5-5h-2z"/>
-    <path d="M15.5 9c-.2-.6-.9-1.3-1.8-1.3h-1.4c-.5 0-.9.4-.9.9v4.8c0 .5.4.9.9.9h1.4c.9 0 1.6-.7 1.8-1.3"/>
+    <path d="M12 0C5.372 0 0 5.373 0 12c0 6.627 5.372 12 12 12s12-5.373 12-12c0-6.627-5.372-12-12-12zm5.937 17h-1.75c-1.375 0-1.688-.938-2.938-1.938-.875-.688-1.25-.688-1.5-.688-.188 0-.313.063-.313.438v1.438c0 .313-.125.625-.563.625-1.313 0-3.25-1.188-4.563-3.375-1.125-1.938-1.375-3.25-1.375-3.688 0-.188.125-.438.438-.438h1.75c.313 0 .438.188.5.438.375 1.375 1 2.563 1.125 2.75.188.313.375.438.563.438.188 0 .313-.125.313-.438v-1.25c-.063-.938-.688-.938-.688-1.375 0-.313.188-.5.563-.5h2.625c.25 0 .438.125.438.438 0 .25-.313.438-.313.75v.625c0 .375.188.5.375.5.188 0 .438-.125.625-.375.625-.813 1.125-2.063 1.125-2.063.125-.313.313-.5.625-.5h1.75c.313 0 .438.188.438.438 0 .438-.563 1.5-1.313 2.563-.813 1.063-.875 1.188-.313 1.875.313.375.688.813.813 1.063.188.313.188.438-.125.438z"/>
   </svg>
 );
 
@@ -31,6 +27,7 @@ const Footer = () => {
           </div>
           
           <div className="flex gap-6">
+            {/* Иконка Telegram */}
             <motion.a
               href="https://t.me/"
               target="_blank"
@@ -41,6 +38,7 @@ const Footer = () => {
               <MessageCircle className="w-6 h-6" />
             </motion.a>
             
+            {/* Иконка WhatsApp */}
             <motion.a
               href="https://wa.me/79614160767"
               target="_blank"
@@ -51,8 +49,9 @@ const Footer = () => {
               <Phone className="w-6 h-6" />
             </motion.a>
             
+            {/* Иконка ВКонтакте */}
             <motion.a
-              href="https://vk.com/"
+              href="https://vk.com/lampacenterbtsk"
               target="_blank"
               rel="noopener noreferrer"
               whileHover={{ scale: 1.2, rotate: 5 }}
