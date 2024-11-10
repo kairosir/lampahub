@@ -2,9 +2,31 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Phone } from 'lucide-react';
 
-// Пути к иконкам Telegram и ВКонтакте
-const telegramIconUrl = "https://i.ibb.co/ZJx8gyq/tg.png";
-const vkIconUrl = "https://i.ibb.co/J5CgHc0/vk.png";
+// SVG иконка Telegram
+const TelegramIcon = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    width="24"
+    height="24"
+    fill="currentColor"
+  >
+    <path d="M10.2 8.4l-5.4 2.8a1 1 0 0 0-.2 1.8l3.2 3.2-1 5.4a1 1 0 0 0 1.4 1.1l4.6-2.4 4.6 2.4a1 1 0 0 0 1.4-1.1l-1-5.4 3.2-3.2a1 1 0 0 0-.2-1.8l-5.4-2.8a1 1 0 0 0-1.4.4l-3.2 3.2L11.6 8a1 1 0 0 0-.4-.6z"/>
+  </svg>
+);
+
+// SVG иконка ВКонтакте
+const VKIcon = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    width="24"
+    height="24"
+    fill="currentColor"
+  >
+    <path d="M12 0C5.372 0 0 5.373 0 12c0 6.627 5.372 12 12 12s12-5.373 12-12c0-6.627-5.372-12-12-12zm5.937 17h-1.75c-1.375 0-1.688-.938-2.938-1.938-.875-.688-1.25-.688-1.5-.688-.188 0-.313.063-.313.438v1.438c0 .313-.125.625-.563.625-1.313 0-3.25-1.188-4.563-3.375-1.125-1.938-1.375-3.25-1.375-3.688 0-.188.125-.438.438-.438h1.75c.313 0 .438.188.5.438.375 1.375 1 2.563 1.125 2.75.188.313.375.438.563.438.188 0 .313-.125.313-.438v-1.25c-.063-.938-.688-.938-.688-1.375 0-.313.188-.5.563-.5h2.625c.25 0 .438.125.438.438 0 .25-.313.438-.313.75v.625c0 .375.188.5.375.5.188 0 .438-.125.625-.375.625-.813 1.125-2.063 1.125-2.063.125-.313.313-.5.625-.5h1.75c.313 0 .438.188.438.438 0 .438-.563 1.5-1.313 2.563-.813 1.063-.875 1.188-.313 1.875.313.375.688.813.813 1.063.188.313.188.438-.125.438z"/>
+  </svg>
+);
 
 const Footer = () => {
   return (
@@ -26,7 +48,7 @@ const Footer = () => {
               whileHover={{ scale: 1.2, rotate: 5 }}
               className="bg-white p-3 rounded-full text-primary hover:bg-secondary transition-colors duration-300"
             >
-              <img src={telegramIconUrl} alt="Telegram" className="w-6 h-6" />
+              <TelegramIcon />
             </motion.a>
             
             {/* Иконка WhatsApp */}
@@ -48,7 +70,7 @@ const Footer = () => {
               whileHover={{ scale: 1.2, rotate: 5 }}
               className="bg-white p-3 rounded-full text-primary hover:bg-secondary transition-colors duration-300"
             >
-              <img src={vkIconUrl} alt="VK" className="w-6 h-6" />
+              <VKIcon />
             </motion.a>
           </div>
         </div>
