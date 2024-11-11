@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Plus } from 'lucide-react';
 import { toast } from 'sonner';
-import { collection, addDoc, deleteDoc, doc, updateDoc, query, orderBy, onSnapshot } from 'firebase/firestore';
-import { db } from '../lib/firebase';
 import NewsForm from '../components/admin/NewsForm';
 import NewsList from '../components/admin/NewsList';
+
+const API_URL = 'http://xn----7sbbah9cidhdgjdbodne.xn--p1ai/api/news.php';
 
 const AdminNews = () => {
   const [news, setNews] = useState([]);
@@ -19,37 +19,45 @@ const AdminNews = () => {
   });
 
   useEffect(() => {
-    const q = query(collection(db, 'news'), orderBy('date', 'desc'));
-    
-    const unsubscribe = onSnapshot(q, (snapshot) => {
-      const newsData = snapshot.docs.map(doc => ({
-        id: doc.id,
-        ...doc.data()
-      }));
-      setNews(newsData);
-    });
-
-    return () => unsubscribe();
+    fetchNews();
   }, []);
+
+  const fetchNews = async () => {
+    try {
+      const response = await fetch(API_URL);
+      const data = await response.json();
+      setNews(data);
+    } catch (error) {
+      console.error('Error:', error);
+      toast.error('Ошибка при загрузке новостей');
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     
     try {
-      if (editingNews) {
-        await updateDoc(doc(db, 'news', editingNews.id), formData);
-        toast.success('Новость успешно обновлена!');
-      } else {
-        await addDoc(collection(db, 'news'), formData);
-        toast.success('Новость успешно добавлена!');
-      }
+      const method = editingNews ? 'PUT' : 'POST';
+      const url = editingNews ? `${API_URL}?id=${editingNews.id}` : API_URL;
       
+      const response = await fetch(url, {
+        method,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (!response.ok) throw new Error('Network response was not ok');
+      
+      toast.success(editingNews ? 'Новость успешно обновлена!' : 'Новость успешно добавлена!');
       setFormData({ date: '', title: '', description: '' });
       setIsAddingNews(false);
       setEditingNews(null);
+      fetchNews();
     } catch (error) {
-      toast.error('Произошла ошибка при сохранении новости');
       console.error('Error:', error);
+      toast.error('Произошла ошибка при сохранении новости');
     }
   };
 
@@ -61,12 +69,18 @@ const AdminNews = () => {
 
   const handleDelete = async (id) => {
     try {
-      await deleteDoc(doc(db, 'news', id));
+      const response = await fetch(`${API_URL}?id=${id}`, {
+        method: 'DELETE',
+      });
+
+      if (!response.ok) throw new Error('Network response was not ok');
+
       setShowDeleteConfirm(null);
       toast.success('Новость успешно удалена!');
+      fetchNews();
     } catch (error) {
-      toast.error('Произошла ошибка при удалении новости');
       console.error('Error:', error);
+      toast.error('Произошла ошибка при удалении новости');
     }
   };
 

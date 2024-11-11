@@ -1,26 +1,29 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Newspaper } from 'lucide-react';
-import { collection, query, orderBy, onSnapshot } from 'firebase/firestore';
-import { db } from '../lib/firebase';
+import { toast } from 'sonner';
+
+const API_URL = 'http://xn----7sbbah9cidhdgjdbodne.xn--p1ai/api/news.php';
 
 const News = () => {
   const [newsItems, setNewsItems] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const q = query(collection(db, 'news'), orderBy('date', 'desc'));
-    
-    const unsubscribe = onSnapshot(q, (snapshot) => {
-      const news = snapshot.docs.map(doc => ({
-        id: doc.id,
-        ...doc.data()
-      }));
-      setNewsItems(news);
-      setLoading(false);
-    });
+    const fetchNews = async () => {
+      try {
+        const response = await fetch(API_URL);
+        const data = await response.json();
+        setNewsItems(data);
+        setLoading(false);
+      } catch (error) {
+        console.error('Error fetching news:', error);
+        toast.error('Ошибка при загрузке новостей');
+        setLoading(false);
+      }
+    };
 
-    return () => unsubscribe();
+    fetchNews();
   }, []);
 
   if (loading) {
