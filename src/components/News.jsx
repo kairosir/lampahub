@@ -1,25 +1,31 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Newspaper } from 'lucide-react';
+import { collection, query, orderBy, onSnapshot } from 'firebase/firestore';
+import { db } from '../lib/firebase';
 
 const News = () => {
-  const newsItems = [
-    {
-      title: "Новый курс по рисованию",
-      date: "15/03/2024",
-      description: "Открыт набор на новый курс по рисованию для начинающих"
-    },
-    {
-      title: "Мастер-класс по керамике",
-      date: "20/03/2024",
-      description: "Приглашаем на увлекательный мастер-класс по керамике"
-    },
-    {
-      title: "Творческий вечер",
-      date: "25/03/2024",
-      description: "Музыкальный вечер с живым выступлением"
-    }
-  ];
+  const [newsItems, setNewsItems] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const q = query(collection(db, 'news'), orderBy('date', 'desc'));
+    
+    const unsubscribe = onSnapshot(q, (snapshot) => {
+      const news = snapshot.docs.map(doc => ({
+        id: doc.id,
+        ...doc.data()
+      }));
+      setNewsItems(news);
+      setLoading(false);
+    });
+
+    return () => unsubscribe();
+  }, []);
+
+  if (loading) {
+    return <div className="text-center py-8">Загрузка новостей...</div>;
+  }
 
   return (
     <section className="section bg-gradient-to-br from-lightblue to-white">
@@ -36,7 +42,7 @@ const News = () => {
           <div className="grid md:grid-cols-3 gap-6">
             {newsItems.map((item, index) => (
               <motion.div
-                key={index}
+                key={item.id}
                 className="card bg-white"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}

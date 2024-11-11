@@ -1,32 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Plus } from 'lucide-react';
 import { toast } from 'sonner';
+import { collection, addDoc, deleteDoc, doc, updateDoc, query, orderBy, onSnapshot } from 'firebase/firestore';
+import { db } from '../lib/firebase';
 import NewsForm from '../components/admin/NewsForm';
 import NewsList from '../components/admin/NewsList';
 
 const AdminNews = () => {
-  const [news, setNews] = useState([
-    {
-      id: 1,
-      title: "Новый курс по рисованию",
-      date: "15/03/2024",
-      description: "Открыт набор на новый курс по рисованию для начинающих"
-    },
-    {
-      id: 2,
-      title: "Мастер-класс по керамике",
-      date: "20/03/2024",
-      description: "Приглашаем на увлекательный мастер-класс по керамике"
-    },
-    {
-      id: 3,
-      title: "Творческий вечер",
-      date: "25/03/2024",
-      description: "Музыкальный вечер с живым выступлением"
-    }
-  ]);
-
+  const [news, setNews] = useState([]);
   const [isAddingNews, setIsAddingNews] = useState(false);
   const [editingNews, setEditingNews] = useState(null);
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(null);
@@ -36,24 +18,39 @@ const AdminNews = () => {
     description: ''
   });
 
-  const handleSubmit = (e) => {
+  useEffect(() => {
+    const q = query(collection(db, 'news'), orderBy('date', 'desc'));
+    
+    const unsubscribe = onSnapshot(q, (snapshot) => {
+      const newsData = snapshot.docs.map(doc => ({
+        id: doc.id,
+        ...doc.data()
+      }));
+      setNews(newsData);
+    });
+
+    return () => unsubscribe();
+  }, []);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     
-    if (editingNews) {
-      setNews(prev => prev.map(item => 
-        item.id === editingNews.id 
-          ? { ...formData, id: item.id }
-          : item
-      ));
-      toast.success('Новость успешно обновлена!');
-    } else {
-      setNews(prev => [...prev, { ...formData, id: Date.now() }].slice(-5));
-      toast.success('Новость успешно добавлена!');
+    try {
+      if (editingNews) {
+        await updateDoc(doc(db, 'news', editingNews.id), formData);
+        toast.success('Новость успешно обновлена!');
+      } else {
+        await addDoc(collection(db, 'news'), formData);
+        toast.success('Новость успешно добавлена!');
+      }
+      
+      setFormData({ date: '', title: '', description: '' });
+      setIsAddingNews(false);
+      setEditingNews(null);
+    } catch (error) {
+      toast.error('Произошла ошибка при сохранении новости');
+      console.error('Error:', error);
     }
-    
-    setFormData({ date: '', title: '', description: '' });
-    setIsAddingNews(false);
-    setEditingNews(null);
   };
 
   const handleEdit = (newsItem) => {
@@ -62,10 +59,15 @@ const AdminNews = () => {
     setIsAddingNews(true);
   };
 
-  const handleDelete = (id) => {
-    setNews(prev => prev.filter(item => item.id !== id));
-    setShowDeleteConfirm(null);
-    toast.success('Новость успешно удалена!');
+  const handleDelete = async (id) => {
+    try {
+      await deleteDoc(doc(db, 'news', id));
+      setShowDeleteConfirm(null);
+      toast.success('Новость успешно удалена!');
+    } catch (error) {
+      toast.error('Произошла ошибка при удалении новости');
+      console.error('Error:', error);
+    }
   };
 
   if (isAddingNews) {
